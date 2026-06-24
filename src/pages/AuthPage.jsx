@@ -32,8 +32,8 @@ export default function AuthPage() {
     <div style={s.page}>
       <div style={s.card}>
         <div style={s.logo}>
-          <span style={s.logoText}>IRON</span>
-          <span style={s.logoAccent}>LOG</span>
+          <span style={s.logoText}>ÉVOLUE</span>
+          <span style={s.logoAccent}></span>
         </div>
         <p style={s.sub}>Track every rep. Own every PR.</p>
 

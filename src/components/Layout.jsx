@@ -24,7 +24,7 @@ export default function Layout() {
     <div style={s.root}>
       {/* Top bar */}
       <header style={s.header}>
-        <span style={s.logo}>IRON<span style={{ color: 'var(--accent)' }}>LOG</span></span>
+        <span style={s.logo}>ÉVOLUE<span style={{ color: 'var(--accent)' }}></span></span>
         <div style={s.headerRight}>
           <span style={s.email}>{user?.email}</span>
           <button style={s.signOut} onClick={handleSignOut}>Sign out</button>
