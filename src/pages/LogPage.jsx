@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from '../components/AuthProvider'
-import { getLogs, addLog, deleteLog, getExercises, addExercise, upsertSessionNote } from '../lib/supabase'
+import { getLogs, addLog, deleteLog, getExercises, addExercise, upsertSessionNote, supabase } from '../lib/supabase'
 import { format } from 'date-fns'
 
 const MUSCLE_GROUPS = {
@@ -28,12 +28,15 @@ export default function LogPage() {
   const [sessionNote, setSessionNote] = useState('')
   const [newExercise, setNewExercise] = useState('')
   const [saving, setSaving] = useState(false)
+  const [plans, setPlans] = useState([])
+  const [selectedPlan, setSelectedPlan] = useState(null)
   const [msg, setMsg] = useState('')
 
   useEffect(() => {
     if (!user) return
     getLogs(user.id).then(({ data }) => setLogs(data || []))
     getExercises(user.id).then(({ data }) => {
+   supabase.from('workout_plans').select('*').eq('user_id', user.id).then(({ data }) => setPlans(data || []))
       if (data?.length) setExercises([...new Set([...DEFAULT_EXERCISES, ...data.map(e => e.name)])])
     })
   }, [user])
@@ -91,7 +94,38 @@ export default function LogPage() {
   return (
     <div style={s.page}>
       <h1 style={s.title}>Log workout</h1>
-
+{plans.length > 0 && (
+  <div style={s.planPicker}>
+    <label style={s.label}>Use a workout plan (optional)</label>
+    <select value={selectedPlan || ''} onChange={e => {
+      const plan = plans.find(p => p.id === e.target.value)
+      setSelectedPlan(e.target.value)
+      if (plan && plan.exercises?.length) {
+        setExercise(plan.exercises[0].exercise)
+        setSetType(plan.exercises[0].set_type || 'Top Set')
+        setWeight(plan.exercises[0].weight_kg || '')
+        setReps(plan.exercises[0].reps || '')
+      }
+    }} style={s.select}>
+      <option value="">No plan</option>
+      {plans.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
+    </select>
+    {selectedPlan && (
+      <div style={s.planExercises}>
+        {plans.find(p => p.id === selectedPlan)?.exercises?.map((ex, i) => (
+          <button key={i} type="button" style={s.planExBtn} onClick={() => {
+            setExercise(ex.exercise)
+            setSetType(ex.set_type || 'Top Set')
+            setWeight(ex.weight_kg || '')
+            setReps(ex.reps || '')
+          }}>
+            {ex.exercise} — {ex.sets}×{ex.reps} @ {ex.weight_kg}kg
+          </button>
+        ))}
+      </div>
+    )}
+  </div>
+)}
       <div style={s.dateRow}>
         <input type="date" value={date} onChange={e => setDate(e.target.value)} style={s.dateInput} />
       </div>
@@ -223,4 +257,7 @@ const s = {
   topSet: { background: 'var(--accent-dim)', color: 'var(--accent)' },
   warmupPill: { background: 'var(--blue-dim)', color: 'var(--blue)' },
   delBtn: { background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: '12px', padding: '4px' },
+  planPicker: { background: 'var(--bg-surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius-lg)', padding: '1.25rem', marginBottom: '1rem', display: 'flex', flexDirection: 'column', gap: '8px' },
+  planExercises: { display: 'flex', flexDirection: 'column', gap: '6px', marginTop: '4px' },
+  planExBtn: { background: 'var(--bg-elevated)', border: '1px solid var(--border)', borderRadius: 'var(--radius-sm)', padding: '10px 12px', color: 'var(--text-primary)', fontSize: '13px', cursor: 'pointer', textAlign: 'left', fontFamily: 'var(--font-body)' },
 }
