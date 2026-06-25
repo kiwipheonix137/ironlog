@@ -11,6 +11,7 @@ import HistoryPage from './pages/HistoryPage'
 import PRPage from './pages/PRPage'
 import ProgressPage from './pages/ProgressPage'
 import MusclesPage from './pages/MusclesPage'
+import PlansPage from './pages/PlansPage'
 import BodyweightPage from './pages/BodyweightPage'
 
 function ProtectedRoute({ children }) {
@@ -37,6 +38,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route path="prs" element={<PRPage />} />
             <Route path="progress" element={<ProgressPage />} />
             <Route path="muscles" element={<MusclesPage />} />
+            <Route path="plans" element={<PlansPage />} />
             <Route path="bodyweight" element={<BodyweightPage />} />
           </Route>
         </Routes>

@@ -9,7 +9,8 @@ const navItems = [
   { to: '/prs', label: 'PRs', icon: '🏆' },
   { to: '/progress', label: 'Progress', icon: '📈' },
   { to: '/muscles', label: 'Muscles', icon: '💪' },
-  { to: '/bodyweight', label: 'Weight', icon: '⚖️' },
+  { to: '/bodyweight', label: 'Weight', icon: '⚖️' }
+  { to: '/plans', label: 'Plans', icon: '📋' },
 ]
 
 export default function Layout() {
