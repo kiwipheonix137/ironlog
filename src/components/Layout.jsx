@@ -8,6 +8,7 @@ const navItems = [
   { to: '/history', label: 'History', icon: '📅' },
   { to: '/prs', label: 'PRs', icon: '🏆' },
   { to: '/progress', label: 'Progress', icon: '📈' },
+  { to: '/muscles', label: 'Muscles', icon: '💪' },
   { to: '/bodyweight', label: 'Weight', icon: '⚖️' },
 ]
 
