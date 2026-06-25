@@ -5,33 +5,38 @@
 }
 
 :root {
-  --bg-base: #0a0a0b;
-  --bg-surface: #111113;
-  --bg-elevated: #1a1a1e;
-  --bg-hover: #222228;
-  --border: rgba(255,255,255,0.07);
-  --border-bright: rgba(255,255,255,0.15);
+  --bg-base: #080809;
+  --bg-surface: #0f0f12;
+  --bg-elevated: #161619;
+  --bg-hover: #1e1e23;
+  --bg-card: #131316;
+  --border: rgba(255,255,255,0.06);
+  --border-bright: rgba(255,255,255,0.12);
   --accent: #c8f135;
-  --accent-dim: rgba(200,241,53,0.12);
-  --accent-glow: rgba(200,241,53,0.25);
-  --text-primary: #f0f0f0;
-  --text-secondary: #8a8a96;
-  --text-muted: #4a4a54;
+  --accent-dim: rgba(200,241,53,0.08);
+  --accent-glow: rgba(200,241,53,0.2);
+  --accent-text: #d4f55a;
+  --text-primary: #f2f2f4;
+  --text-secondary: #7a7a88;
+  --text-muted: #3a3a46;
   --red: #ff4d4d;
-  --red-dim: rgba(255,77,77,0.12);
+  --red-dim: rgba(255,77,77,0.1);
   --blue: #4d9fff;
-  --blue-dim: rgba(77,159,255,0.12);
+  --blue-dim: rgba(77,159,255,0.1);
   --purple: #a855f7;
-  --purple-dim: rgba(168,85,247,0.12);
+  --purple-dim: rgba(168,85,247,0.1);
   --orange: #ff8c42;
-  --orange-dim: rgba(255,140,66,0.12);
+  --orange-dim: rgba(255,140,66,0.1);
+  --green: #1dd1a1;
+  --green-dim: rgba(29,209,161,0.1);
   --font-display: 'Syne', sans-serif;
   --font-body: 'DM Sans', sans-serif;
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 20px;
-  --nav-height: 64px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.4), 0 0 0 0.5px rgba(255,255,255,0.05);
+  --shadow-glow: 0 0 30px rgba(200,241,53,0.08);
 }
 
 html, body, #root {
@@ -48,12 +53,19 @@ input, select, textarea, button {
   font-family: var(--font-body);
 }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 2px; }
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.4);
+}
 
-/* Utility */
+select option {
+  background: #161619;
+  color: #f2f2f4;
+}
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
+
 .sr-only {
   position: absolute; width: 1px; height: 1px;
   padding: 0; margin: -1px; overflow: hidden;
